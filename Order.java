@@ -3,9 +3,9 @@ import java.util.Objects;
 
 final class Order {
     
-    private int orderNumber;
-    private ArrayList<Product> products;
-    private int timestamp;
+    private final int orderNumber;
+    private final ArrayList<Product> products;
+    private final int timestamp;
 
     public Order(int orderNumber, ArrayList<Product> products, int timestamp) {
         this.orderNumber = orderNumber;
