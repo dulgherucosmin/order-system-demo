@@ -6,9 +6,19 @@ public class Product implements Comparable<Product> {
     private double price;
 
     public Product(String title, double price) {
-        // TODO: data validation
-        this.title = title;
-        this.price = price;
+        // data validation
+        if (!title.isEmpty()) {
+            this.title = title;
+        } else {
+            throw new IllegalStateException("Title cannot be null.");
+        }
+
+        // data validation
+        if (price > 0) {
+            this.price = price;
+        } else {
+            throw new IllegalStateException("Price must be greater than 0.");
+        }
         this.productCode = nextProductCode++;
     }
 
@@ -57,20 +67,28 @@ public class Product implements Comparable<Product> {
         if (this.title == null) { return -1; }
         if (otherProduct.title == null) { return 1; }
 
-        // TODO: proper comments here
+        // return comparison
         return this.title.compareToIgnoreCase(otherProduct.title);
 
     }
 
     /* SETTERS */
     public void setTitle(String newTitle) {
-        // TODO: data validation
-        this.title = newTitle;
+        // data validation
+        if (!newTitle.isEmpty()) {
+            this.title = newTitle;
+        } else {
+            throw new IllegalStateException("Title cannot be null.");
+        }
     }
 
     public void setPrice(double newPrice) {
-        // TODO: data validation
-        this.price = newPrice;
+        // data validation
+        if (newPrice > 0) {
+            this.price = newPrice;
+        } else {
+            throw new IllegalStateException("Price must be greater than 0.");
+        }
     }
         
     /* GETTERS */
