@@ -30,6 +30,18 @@ final class Order {
     }
 
     @Override
+    public String toString() {
+        // create info string variable
+        String s = "Order Number: " + this.orderNumber + "\nTimestamp: " + this.timestamp + "Products:";
+        // loop through products
+        for (Product p: products) {
+            // add product string to the main string s
+            s += "\n\n" + p.toString();
+        }
+        return s;
+    }
+
+    @Override
     public boolean equals(Object object) {
         if (this == object) { return true; }
         
