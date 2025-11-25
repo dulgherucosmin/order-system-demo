@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.time.LocalDateTime;
 
 class Inventory {
@@ -45,17 +46,18 @@ class Inventory {
     }
 
     public void remove(Product product) {
-        // check if product is a null object
         if (product == null) {
             throw new IllegalArgumentException("Product cannot be null.");
         }
-
-        // loop through products
-        for (Product p: products) {
-            // product is found
+        Iterator<Product> iterator = products.iterator();
+        // while the iterator can keep going
+        while (iterator.hasNext()) {
+            Product p = iterator.next();
+            // products match
             if (p == product) {
-                // remove product from the arraylist
-                products.remove(p);
+                // remove product
+                iterator.remove(); // safe removal during iteration
+                break;
             }
         }
     }
@@ -79,24 +81,27 @@ class Inventory {
 
     public Order generateOrder(int[] productCodes) {
         ArrayList<Product> orderProducts = new ArrayList<>();
+        ArrayList<Product> productsToRemove = new ArrayList<>();
 
         // loop through product codes
-        for (int code: productCodes) {
+        for (int code : productCodes) {
             // loop through products
-            for (Product p: products) {
-                // check if product codes match
+            for (Product p : products) {
+                // product codes match
                 if (p.getProductCode() == code) {
-                    // add product to the order
-                    orderProducts.add(p);
-                    // remove product from inventory
-                    this.remove(p);
+                    orderProducts.add(p); // add to the order products
+                    productsToRemove.add(p); // mark for removal
                 }
             }
         }
+        // remove products after iteration to avoid errors
+        for (Product p : productsToRemove) {
+            this.remove(p);
+        }
 
-        // increment number of orders filled
+        // increment orders filled
         ordersFilled++;
-        // return new order instance
+        // return new order object
         return new Order(ordersFilled, orderProducts, LocalDateTime.now());
     }
 
