@@ -26,7 +26,7 @@ public class Product implements Comparable<Product> {
 
     @Override
     public boolean equals(Object object) {
-        // verify that otherProduct is a product object
+        // verify that object is a product object
         if (!(object instanceof Product)) {
             return false; // we can only compare products
         }
