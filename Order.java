@@ -5,26 +5,27 @@ import java.util.List;
 final class Order {
     
     private int orderNumber;
-    private List<Product> products;
+    private ArrayList<Product> products;
     private int timestamp;
 
     public Order(int orderNumber, ArrayList<Product> products, int timestamp) {
         this.orderNumber = orderNumber;
         this.timestamp = timestamp;
 
+
         // validate data (check if null / empty)
         if (products == null || products.isEmpty()) {
-            this.products = Collections.emptyList();
+            // create a new empty arraylist (copy of products)
+            this.products = new ArrayList<Product>();
         }
         else {
-            // create a temporary variable
-            List<Product> tempProducts = new ArrayList<>(products.size());
+            // create new variable as a copy of the products arraylist
+            ArrayList<Product> copy = new ArrayList<>(products.size());
+
             // loop through products
             for (Product p: products) {
-                tempProducts.add(new Product(p)); // avoid using the same instance so create a new one
+                copy.add(p);
             }
-            // return list that is unmodifiable
-            this.products = Collections.unmodifiableList(tempProducts);
         }
     }
 
@@ -37,21 +38,21 @@ final class Order {
         return timestamp;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
 
         // validate if null
         if (products.isEmpty()) {
-            return Collections.emptyList();
+            return new ArrayList<Product>();
         }
 
-        // create a temporary variable
-        List<Product> productsCopy = new ArrayList<>(products.size());
+        // create new variable as a copy of the products arraylist
+        ArrayList<Product> copy_ = new ArrayList<>(products.size());
         // loop through products
         for (Product p: products) {
-            productsCopy.add(new Product(p)); // avoid using the same instance, so create a new product
+            copy_.add(p);
         }
-        // return list that is unmodifiable
-        return Collections.unmodifiableList(productsCopy);
+        // return statement
+        return copy_;
     }
 
 }
