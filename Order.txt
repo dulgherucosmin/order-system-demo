@@ -1,0 +1,6 @@
+Order Number: 1
+Timestamp: 2025-11-25T18:26:36.331586600
+2,Apple,2.0
+1,Banana,2.0
+5,Bread,2.4
+3,Yogurt,1.5
