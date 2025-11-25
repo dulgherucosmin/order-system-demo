@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -5,9 +6,9 @@ final class Order {
     
     private final int orderNumber;
     private final ArrayList<Product> products;
-    private final int timestamp;
+    private final LocalDateTime timestamp;
 
-    public Order(int orderNumber, ArrayList<Product> products, int timestamp) {
+    public Order(int orderNumber, ArrayList<Product> products, LocalDateTime timestamp) {
         this.orderNumber = orderNumber;
         this.timestamp = timestamp;
 
@@ -64,7 +65,7 @@ final class Order {
         return this.orderNumber;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
