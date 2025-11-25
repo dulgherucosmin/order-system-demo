@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 final class Order {
     
@@ -24,7 +25,26 @@ final class Order {
             for (Product p: products) {
                 copy.add(p);
             }
+            this.products = copy;
         }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) { return true; }
+        
+        // validate that the object is an Order object
+        if (!(object instanceof Order)) { return false; }
+
+        Order otherOrder = (Order) object;
+        return otherOrder.getOrderNumber() == this.orderNumber 
+            && otherOrder.getTimestamp() == this.timestamp 
+            && Objects.equals(this.products, otherOrder.products);
+    }
+    // override hashcode such that it matches equal method
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderNumber, timestamp, products);
     }
 
     /* GETTERS */
