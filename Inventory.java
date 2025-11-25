@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.time.LocalDateTime;
 
 class Inventory {
 
     private static Inventory instance = null;
 
-    private static int ordersFilled;
+    private static int ordersFilled = 0;
     private ArrayList<Product> products;
 
     // empty constructor
@@ -77,7 +78,26 @@ class Inventory {
     }
 
     public Order generateOrder(int[] productCodes) {
-        return null;
+        ArrayList<Product> orderProducts = new ArrayList<>();
+
+        // loop through product codes
+        for (int code: productCodes) {
+            // loop through products
+            for (Product p: products) {
+                // check if product codes match
+                if (p.getProductCode() == code) {
+                    // add product to the order
+                    orderProducts.add(p);
+                    // remove product from inventory
+                    this.remove(p);
+                }
+            }
+        }
+
+        // increment number of orders filled
+        ordersFilled++;
+        // return new order instance
+        return new Order(ordersFilled, orderProducts, LocalDateTime.now());
     }
 
 }
