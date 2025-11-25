@@ -7,7 +7,7 @@ class Inventory {
     private static Inventory instance = null;
 
     private static int ordersFilled = 0;
-    private ArrayList<Product> products;
+    private ArrayList<Product> products = new ArrayList<>();
 
     // empty constructor
     private Inventory() {}
